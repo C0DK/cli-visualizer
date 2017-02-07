@@ -86,6 +86,7 @@ bool vis::SpectrumTransformer::prepare_fft_input(pcm_stereo_sample *buffer,
     return is_silent;
 }
 
+
 void vis::SpectrumTransformer::execute(pcm_stereo_sample *buffer,
                                        vis::NcursesWriter *writer,
                                        const bool is_stereo)
@@ -182,8 +183,14 @@ void vis::SpectrumTransformer::execute(pcm_stereo_sample *buffer,
             ++max_bar_height; // add one so that the spectrums overlap in the
                               // middle
         }
+        FILE* f = fopen("visOut.pik","w");
 
-        draw_bars(m_bars_left, m_bars_falloff_left, max_bar_height, true,
+        for(int i = 0; i < m_bars_left.size(); i++) {
+            fprintf(f,"%lf ", (1+m_bars_left[i]));
+        }
+
+        fclose(f);
+        /*draw_bars(m_bars_left, m_bars_falloff_left, max_bar_height, true,
                   bar_row_msg, writer);
         draw_bars(m_bars_right, m_bars_falloff_right, max_bar_height, false,
                   bar_row_msg, writer);
@@ -195,7 +202,7 @@ void vis::SpectrumTransformer::execute(pcm_stereo_sample *buffer,
         if (is_stereo)
         {
             fftw_destroy_plan(m_fftw_plan_right);
-        }
+        }*/
     }
     else
     {
