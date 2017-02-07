@@ -169,9 +169,9 @@ void vis::SpectrumTransformer::execute(pcm_stereo_sample *buffer,
         }
 
         create_spectrum_bars(m_fftw_output_left, m_fftw_results, height, width,
-                             number_of_bars, m_bars_left, m_bars_falloff_left);
+                             33, m_bars_left, m_bars_falloff_left);
         create_spectrum_bars(m_fftw_output_right, m_fftw_results, height, width,
-                             number_of_bars, m_bars_right,
+                             33, m_bars_right,
                              m_bars_falloff_right);
 
         // clear screen before writing
@@ -190,7 +190,7 @@ void vis::SpectrumTransformer::execute(pcm_stereo_sample *buffer,
         }
 
         fclose(f);
-        /*draw_bars(m_bars_left, m_bars_falloff_left, max_bar_height, true,
+        draw_bars(m_bars_left, m_bars_falloff_left, max_bar_height, true,
                   bar_row_msg, writer);
         draw_bars(m_bars_right, m_bars_falloff_right, max_bar_height, false,
                   bar_row_msg, writer);
@@ -202,7 +202,7 @@ void vis::SpectrumTransformer::execute(pcm_stereo_sample *buffer,
         if (is_stereo)
         {
             fftw_destroy_plan(m_fftw_plan_right);
-        }*/
+        }
     }
     else
     {
